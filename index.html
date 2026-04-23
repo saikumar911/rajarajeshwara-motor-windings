@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajarajeshwara Motor Winding Billing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Admin Panel -->
+        <div class="admin-panel no-print">
+            <h1 class="logo-title">Admin Dashboard</h1>
+            
+            <div class="card">
+                <h2>Customer Details</h2>
+                <div class="form-group">
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" id="customerName" placeholder="Enter customer name" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Add Item to Bill</h2>
+                <div class="form-row">
+                    <div class="form-group flex-2">
+                        <label for="productSelect">Select Product</label>
+                        <select id="productSelect">
+                            <option value="" disabled selected>Loading products...</option>
+                        </select>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label for="productPrice">Price (₹)</label>
+                        <input type="number" id="productPrice" placeholder="0.00" min="0" step="1"/>
+                    </div>
+                </div>
+                <button id="addItemBtn" class="btn btn-primary w-full">Add to Bill</button>
+            </div>
+
+            <div class="card">
+                <h2>Add Custom Product</h2>
+                <p class="subtitle">Add a new product to the database permanently.</p>
+                <div class="form-row align-end">
+                    <div class="form-group flex-2">
+                        <label for="newProductName">Product Name</label>
+                        <input type="text" id="newProductName" placeholder="e.g. Copper Wire" autocomplete="off" />
+                    </div>
+                    <button id="addNewProductBtn" class="btn btn-secondary flex-1">Save Product</button>
+                </div>
+            </div>
+
+            <!-- Links to new features -->
+            <div class="card no-print" style="margin-top: 1.5rem; text-align: center;">
+                <h2>Search & History</h2>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="billnumber.html" class="btn btn-secondary flex-1">Search Bills</a>
+                    <a href="allbills.html" class="btn btn-secondary flex-1">All Bills</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Receipt / Bill Preview -->
+        <div class="bill-preview-container">
+            <div class="bill-card" id="printableBill">
+                <div class="bill-header">
+                    <h2>Rajarajeshwara<br/>Motor Winding</h2>
+                    <p>Contact: +91 XXXXX XXXXX</p>
+                    <div class="bill-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Bill No:</span>
+                            <span id="billNumberDisplay" style="font-weight: 700; color: var(--primary);">--</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Date:</span>
+                            <span id="billDate">--/--/----</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Time:</span>
+                            <span id="billTime">--:--</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bill-customer-info">
+                    <strong>Bill To:</strong>
+                    <span id="displayCustomerName">N/A</span>
+                </div>
+
+                <div class="bill-items-container">
+                    <table class="bill-table">
+                        <thead>
+                            <tr>
+                                <th>Item Description</th>
+                                <th class="text-right">Price</th>
+                                <th class="action-col no-print text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="billItemsList">
+                            <tr class="empty-row"><td colspan="3" class="text-center">No items added yet.</td></tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="text-right"><strong>Total Amount:</strong></td>
+                                <td class="text-right"><strong class="total-amount">₹<span id="billTotal">0.00</span></strong></td>
+                                <td class="action-col no-print"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                
+                <div class="bill-footer">
+                    <p>Thank you for your business!</p>
+                </div>
+            </div>
+
+            <div class="bill-actions no-print">
+                <button id="printBtn" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg> Print
+                </button>
+                <button id="shareWhatsappBtn" class="btn btn-success">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> WhatsApp
+                </button>
+                <button id="saveBillBtn" class="btn btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Save Bill
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Added Links at the bottom of the page as requested -->
+    <div style="text-align: center; margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 2rem; width: 100%;">
+        <a href="billnumber.html" style="color: var(--primary); text-decoration: none; margin-right: 1.5rem; font-weight: 600;">Go to Search Bills</a>
+        <a href="allbills.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Go to All Bills</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

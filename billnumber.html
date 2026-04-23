@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bills - Rajarajeshwara Motor Winding Billing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container single-container">
+        
+        <div class="card no-print" style="margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h1 class="logo-title" style="margin: 0; font-size: 1.5rem;">Search Bills</h1>
+                <a href="index.html" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <p class="subtitle">Search your existing bills by Bill No, Date, or Customer Name.</p>
+            <div class="search-input-wrapper" style="margin-top: 1.5rem;">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Enter Bill No, Date, or Customer Name..." autocomplete="off">
+            </div>
+        </div>
+
+        <div id="loadingIndicator" class="loading hidden">
+            ⏳ Searching database...
+        </div>
+
+        <div id="searchResults" class="results-grid">
+            <!-- Search Results will be dynamically injected here -->
+        </div>
+    </div>
+
+    <script type="module" src="billnumber.js"></script>
+</body>
+</html>

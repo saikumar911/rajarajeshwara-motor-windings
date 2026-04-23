@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Bills - Rajarajeshwara Motor Winding Billing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container single-container">
+        
+        <div class="card no-print" style="margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h1 class="logo-title" style="margin: 0; font-size: 1.5rem;">All Bills</h1>
+                <a href="index.html" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+            </div>
+            <p class="subtitle" style="margin-top: 1rem; margin-bottom: 0;">Click on any bill below to view full details and items.</p>
+        </div>
+
+        <div id="loadingIndicator" class="loading">
+            ⏳ Fetching bills from database...
+        </div>
+
+        <div id="billsList" class="bills-list">
+            <!-- Bills will be dynamically injected here -->
+        </div>
+    </div>
+
+    <script type="module" src="allbills.js"></script>
+</body>
+</html>
