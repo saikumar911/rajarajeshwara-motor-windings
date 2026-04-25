@@ -42,6 +42,7 @@ const billNumberDisplay = document.getElementById('billNumberDisplay');
 const printBtn = document.getElementById('printBtn');
 const shareWhatsappBtn = document.getElementById('shareWhatsappBtn');
 const saveBillBtn = document.getElementById('saveBillBtn');
+const newBillBtn = document.getElementById('newBillBtn');
 
 // Initialize App
 async function init() {
@@ -61,6 +62,9 @@ async function init() {
     printBtn.addEventListener('click', () => window.print());
     shareWhatsappBtn.addEventListener('click', handleWhatsAppShare);
     saveBillBtn.addEventListener('click', handleSaveBill);
+    if (newBillBtn) {
+        newBillBtn.addEventListener('click', handleNewBill);
+    }
 
     // Initial Render
     renderBillItems();
@@ -320,6 +324,21 @@ async function handleWhatsAppShare() {
 }
 
 /**
+ * Reset the form for a new bill
+ */
+function handleNewBill() {
+    if (currentBillItems.length > 0) {
+        const confirmNew = confirm("Are you sure you want to clear the current bill and start a new one?");
+        if (!confirmNew) return;
+    }
+    customerNameInput.value = '';
+    displayCustomerName.textContent = 'N/A';
+    currentBillItems = [];
+    renderBillItems();
+    generateNewBillNumber();
+}
+
+/**
  * Save final bill object to Firestore `bills` collection
  */
 async function handleSaveBill() {
@@ -344,14 +363,7 @@ async function handleSaveBill() {
         
         await addDoc(collection(db, "bills"), billData);
         
-        alert("Bill saved successfully into the database!");
-        
-        // Reset the form for the next bill
-        customerNameInput.value = '';
-        displayCustomerName.textContent = 'N/A';
-        currentBillItems = [];
-        renderBillItems();
-        generateNewBillNumber(); // generate new bill number for next customer
+        alert("Bill saved successfully into the database! You can now share it or print it.");
         
     } catch (e) {
         console.error("Error saving bill: ", e);
